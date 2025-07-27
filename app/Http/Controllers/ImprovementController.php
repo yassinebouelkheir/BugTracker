@@ -12,7 +12,8 @@ class ImprovementController extends Controller
     }
 
     public function show(Improvement $improvement) {
-        return $improvement->load('creator');
+        $improvement->load(['creator', 'comments']);
+        return view('improvements.show', compact('improvement'));
     }
 
     public function store(Request $request) {

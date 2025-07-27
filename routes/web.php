@@ -10,21 +10,24 @@ use App\Http\Controllers\IssueController;
 use App\Http\Controllers\ImprovementController;
 use App\Http\Controllers\TeamController;
 
-
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-
-    return redirect('/login'); 
-})->name('logout');
-
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::middleware(['auth'])->group(function () {
-    
+    Route::get('/logout', function () {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/login');
+    })->name('custom.logout');
+
+    Route::get('/home', [ProjetController::class, 'userProjects'])->name('mes-projets');
+    Route::get('/projets/{id}', [ProjetController::class, 'showProjet'])->name('projets.show');
+
     Route::middleware('role:admin')->prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);

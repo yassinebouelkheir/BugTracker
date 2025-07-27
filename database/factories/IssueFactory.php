@@ -13,7 +13,7 @@ class IssueFactory extends Factory
             'titre' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(),
             'priority' => $this->faker->numberBetween(1, 3),
-            'state' => $this->faker->randomElement(['open', 'in progress', 'closed']),
+            'state' => $this->faker->randomElement(['Ouvert', 'Fermé']),
             'creator_id' => \App\Models\User::factory(),
         ];
     }

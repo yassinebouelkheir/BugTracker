@@ -11,8 +11,10 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->text('description')->nullable();
-            $table->string('state')->default('open');
+            $table->string('state')->default('En attente');
             $table->unsignedBigInteger('creator_id');
+            $table->unsignedBigInteger('projet_id')->nullable();
+            $table->foreign('projet_id')->references('id')->on('projets')->onDelete('cascade');
             $table->timestamps();
 
             $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');

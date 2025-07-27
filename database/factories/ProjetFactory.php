@@ -10,10 +10,10 @@ class ProjetFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->sentence(3),
+            'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
             'date_assignation' => $this->faker->date(),
-            'avancement' => $this->faker->randomElement(['non commencé', 'en cours', 'terminé']),
+            'avancement' => $this->faker->numberBetween(20, 80),
             'priority' => $this->faker->numberBetween(1, 3),
             'team_id' => null, // assign in seeder if needed
         ];

@@ -12,7 +12,8 @@ class IssueController extends Controller
     }
 
     public function show(Issue $issue) {
-        return $issue->load('creator');
+        $issue->load(['creator', 'comments']);
+        return view('issues.show', compact('issue'));
     }
 
     public function store(Request $request) {

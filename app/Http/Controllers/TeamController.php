@@ -17,13 +17,13 @@ class TeamController extends Controller
 
     public function store(Request $request) {
         $data = $request->validate([
-            'nom' => 'required|string'
+            'name' => 'required|string'
         ]);
         return Team::create($data);
     }
 
     public function update(Request $request, Team $team) {
-        $team->update($request->only(['nom']));
+        $team->update($request->only(['name']));
         return $team;
     }
 

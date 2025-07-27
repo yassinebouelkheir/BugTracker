@@ -12,7 +12,7 @@ class ImprovementFactory extends Factory
         return [
             'titre' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(),
-            'state' => $this->faker->randomElement(['open', 'in progress', 'closed']),
+            'state' => $this->faker->randomElement(['En attente', 'Accepté', 'Refusé']),
             'creator_id' => \App\Models\User::factory(),
         ];
     }

@@ -9,10 +9,10 @@ return new class extends Migration
     {
         Schema::create('projets', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('name');
             $table->text('description')->nullable();
             $table->date('date_assignation')->nullable();
-            $table->string('avancement')->default('non commencé');
+            $table->integer('avancement')->default(0);
             $table->integer('priority')->default(1);
             $table->unsignedBigInteger('team_id')->nullable(); // nullable foreign key for team
             $table->timestamps();

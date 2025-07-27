@@ -8,7 +8,7 @@ class Projet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'description', 'team_id', 'date_assignation', 'avancement', 'priority'];
+    protected $fillable = ['name', 'description', 'team_id', 'date_assignation', 'avancement', 'priority'];
 
     public function users()
     {
@@ -20,9 +20,19 @@ class Projet extends Model
         return $this->belongsTo(Team::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class, 'projet_id'); 
+    }
+
+    public function improvements()
+    {
+        return $this->hasMany(Improvement::class, 'projet_id');
     }
 }
 

@@ -10,14 +10,21 @@ class Issue extends Model
 
     protected $fillable = ['titre', 'description', 'priority', 'state', 'creator_id'];
 
+    public const STATE_OPEN = 'Ouvert';
+    public const STATE_CLOSED = 'Fermé';
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+    public function projet()
+    {
+        return $this->belongsTo(Projet::class);
     }
 }
 

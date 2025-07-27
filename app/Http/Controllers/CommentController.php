@@ -15,14 +15,24 @@ class CommentController extends Controller
         return $comment->load(['user', 'projet']);
     }
 
-    public function store(Request $request) {
-        $data = $request->validate([
+    public function store(Request $request)
+    {
+        $request->validate([
+            'commentable_type' => 'required|string',
+            'commentable_id' => 'required|integer',
             'content' => 'required|string',
-            'user_id' => 'required|exists:users,id',
-            'projet_id' => 'required|exists:projets,id'
         ]);
-        return Comment::create($data);
+
+        Comment::create([
+            'commentable_type' => $request->commentable_type,
+            'commentable_id' => $request->commentable_id,
+            'user_id' => auth()->id(),
+            'content' => $request->content,
+        ]);
+
+        return back();
     }
+
 
     public function update(Request $request, Comment $comment) {
         $comment->update($request->only(['content']));
